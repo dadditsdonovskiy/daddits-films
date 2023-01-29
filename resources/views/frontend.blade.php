@@ -75,7 +75,7 @@
 {{--<div class="flex-center position-ref full-height">--}}
 
 <div id="app">
-    <vue-app/>
+    <router-view></router-view>
 </div>
 
 {{--</div>--}}
