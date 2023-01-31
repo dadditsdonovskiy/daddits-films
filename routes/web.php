@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/books', 'frontend')
-    ->middleware(['auth']);
-    //->where('any', '.*');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('loginForm');
 Route::post('login', [LoginController::class, 'login'])->name('login');
