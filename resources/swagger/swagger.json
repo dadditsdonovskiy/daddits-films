@@ -112,7 +112,7 @@
                                         {
                                             "properties": {
                                                 "result": {
-                                                    "$ref": "#/components/schemas/user"
+                                                    "$ref": "#/components/schemas/director"
                                                 }
                                             }
                                         }
@@ -1040,11 +1040,11 @@
                     }
                 ]
             },
-            "user": {
+            "director": {
                 "type": "object",
                 "required": [
                     "firstname",
-                    "lasttname",
+                    "lastname",
                     "birthday_date"
                 ],
                 "properties": {
