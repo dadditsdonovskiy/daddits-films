@@ -7,12 +7,4 @@
 // AdminLTE
 @import '../../vendor/almasaeed2010/adminlte/dist/css/adminlte.css';
 // Bootstrap
-// Already imported by AdminLTE
-//@import '~bootstrap/scss/bootstrap';
-.form__action__delete{
-    display: inline-block;
-    button {
-        padding: 0;
-        vertical-align: unset;
-    }
-}
+@import '~bootstrap/scss/bootstrap';

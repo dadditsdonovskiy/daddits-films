@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\User\ResetPasswordController;
 use App\Http\Controllers\Api\User\SocialLoginController;
 use App\Http\Controllers\Api\User\TokenController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\DirectorController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::apiResource('directors', DirectorController::class);
 Route::group(
     ['middleware' => ['json.formatter']],
     function () {

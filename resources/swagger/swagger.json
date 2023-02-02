@@ -45,6 +45,88 @@
         }
     ],
     "paths": {
+        "/v1/directors": {
+            "get": {
+                "security": [],
+                "summary": "Get list of directors",
+                "tags": [
+                    "Director"
+                ],
+                "operationId": "directorsIndex",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Pagination page"
+                    },
+                    {
+                        "in": "query",
+                        "name": "perPage",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Per page items"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "description": "Sort ordering. You can use order=[-]sortOrder as parameter in Url. By default, if sort is null, sort order is DESC",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "createdAt",
+                                "-createdAt",
+                                "firstname",
+                                "-firstname",
+                                "lastname",
+                                "-lastname",
+                                "birthDayAt",
+                                "-birthDayAt"
+                            ]
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "Search by firstname and lastname",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/status200"
+                                        },
+                                        {
+                                            "properties": {
+                                                "result": {
+                                                    "$ref": "#/components/schemas/director"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    }
+                }
+            }
+        },
         "/v1/user/login/{type}": {
             "post": {
                 "security": [],
@@ -958,14 +1040,22 @@
                     }
                 ]
             },
-            "user": {
+            "director": {
                 "type": "object",
                 "required": [
-                    "email"
+                    "firstname",
+                    "lastname",
+                    "birthday_date"
                 ],
                 "properties": {
-                    "email": {
+                    "firstname": {
                         "type": "string"
+                    },
+                    "lastname": {
+                        "type": "string"
+                    },
+                    "birthday_date": {
+                        "type": "integer"
                     }
                 }
             },
