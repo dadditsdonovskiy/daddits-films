@@ -23,7 +23,8 @@ use App\Http\Controllers\Api\DirectorController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('directors', DirectorController::class);
+Route::get("/directors", [DirectorController::class, 'index']);
+Route::post("/directors", [DirectorController::class, 'create']);
 Route::group(
     ['middleware' => ['json.formatter']],
     function () {

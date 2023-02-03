@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Director\DirectorCreateRequest;
 use App\Models\Director;
 use App\Http\Requests\Api\Director\DirectorListRequest;
 use App\Http\Resources\Api\DirectorResource;
+use App\Services\Director\CreateDirectorService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -28,5 +31,20 @@ class DirectorController extends Controller
                 )
                 ->paginate($directorListRequest->getPerPage())
         );
+    }
+
+    /**
+     * @param DirectorCreateRequest $directorCreate
+     * @param CreateDirectorService $createDirectorService
+     * @return DirectorResource
+     * @throws GeneralException
+     */
+    public function create(
+        DirectorCreateRequest $directorCreate,
+        CreateDirectorService $createDirectorService
+    ): DirectorResource {
+        $director = $createDirectorService->create($directorCreate->all());
+
+        return new DirectorResource($director);
     }
 }

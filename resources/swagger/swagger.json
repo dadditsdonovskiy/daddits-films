@@ -125,6 +125,69 @@
                         "$ref": "#/components/responses/422"
                     }
                 }
+            },
+            "post": {
+                "security": [],
+                "summary": "Add new director",
+                "tags": [
+                    "Director"
+                ],
+                "operationId": "directorAdd",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "firstname": {
+                                        "type": "string",
+                                        "description": "Director's firstname",
+                                        "example": "Woody",
+                                        "required": true
+                                    },
+                                    "lastname": {
+                                        "type": "string",
+                                        "description": "Director's lastname",
+                                        "example": "Allen",
+                                        "required": true
+                                    },
+                                    "birthdayDate": {
+                                        "type": "string",
+                                        "description": "Director's birthday date",
+                                        "example": "1935:01:01",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/status201"
+                                        },
+                                        {
+                                            "properties": {
+                                                "result": {
+                                                    "$ref": "#/components/schemas/director"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    }
+                }
             }
         },
         "/v1/user/login/{type}": {
