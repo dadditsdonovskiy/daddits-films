@@ -5,21 +5,11 @@ namespace App\Http\Requests\Api\Director;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-
 /**
  * Class DirectorCreateRequest
  */
 class DirectorCreateRequest extends FormRequest
 {
-    /**
-     * @var mixed
-     */
-    private $lastname;
-    /**
-     * @var mixed
-     */
-    private $birthdayDate;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,15 +27,11 @@ class DirectorCreateRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('directors', 'firstname')
-            ->where(
-            'lastname',
-            $this->lastname
-        )
-            ->where(
-                'birthday_date',
-                $this->birthdayDate
-            );
+        $lastname = $this->lastname;
+        $date = $this->birthdayDate;
+        $unique = Rule::unique('directors','firstname')
+            ->where('lastname',$lastname)
+            ->where('birthday_date',$date);
         return [
             'firstname' => ['required', 'string', $unique],
             'lastname' => ['required', 'string'],
@@ -53,10 +39,13 @@ class DirectorCreateRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     public function messages()
     {
         return [
-            'firstname.unique' => 'Given ip and hostname are not unique',
+            'firstname.unique' => 'Not unique combination of firstname, lastname and birthdate',
         ];
     }
 }
