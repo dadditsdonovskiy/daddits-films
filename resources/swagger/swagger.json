@@ -190,6 +190,77 @@
                 }
             }
         },
+        "/v1/directors/{directorId}/upload": {
+            "post": {
+                "security": [],
+                "summary": "Upload director's image",
+                "tags": [
+                    "Director"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "directorId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "operationId": "directorUploadImage",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "description": "User file"
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "Director's image type"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/status201"
+                                        },
+                                        {
+                                            "properties": {
+                                                "result": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/file"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/responses/422"
+                    }
+                }
+            }
+        },
         "/v1/user/login/{type}": {
             "post": {
                 "security": [],
@@ -439,7 +510,6 @@
                 }
             }
         },
-
         "/v1/user/change-password": {
             "patch": {
                 "summary": "Change User Password",
@@ -553,7 +623,6 @@
                 }
             }
         },
-
         "/v1/email/resend": {
             "post": {
                 "security": [],
@@ -621,10 +690,8 @@
                 }
             }
         },
-
         "/v1/user/token": {
             "get": {
-
                 "summary": "User Tokens list",
                 "tags": [
                     "User",
@@ -699,7 +766,6 @@
                 }
             }
         },
-
         "/v1/config": {
             "get": {
                 "security": [],
@@ -734,7 +800,6 @@
                 }
             }
         },
-
         "/v1/pages": {
             "get": {
                 "security": [],
@@ -1118,6 +1183,31 @@
                         "type": "string"
                     },
                     "birthday_date": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "file": {
+                "type": "object",
+                "required": [
+                    "url",
+                    "type",
+                    "file_size"
+                ],
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "integer"
+                    },
+                    "file_size": {
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "integer"
+                    },
+                    "updated_at": {
                         "type": "integer"
                     }
                 }

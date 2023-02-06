@@ -30,6 +30,9 @@ return [
             'directors' => [
                 'create_error' => 'There was a problem creating this director. Please try again.',
             ],
+            'director_images' => [
+                'create_error' => 'There was a problem creating this director\'s image. Please try again.',
+            ],
             'users' => [
                 'already_confirmed' => 'This user is already confirmed.',
                 'cant_confirm' => 'There was a problem confirming the user account.',

@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\DirectorController;
 */
 Route::get("/directors", [DirectorController::class, 'index']);
 Route::post("/directors", [DirectorController::class, 'create']);
+Route::post('/directors/{directorId}/upload', [DirectorController::class, 'uploadImage'])->name('uploadImageFile');
 Route::group(
     ['middleware' => ['json.formatter']],
     function () {
