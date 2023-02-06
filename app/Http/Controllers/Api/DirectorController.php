@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Director\DirectorCreateRequest;
+use App\Http\Requests\Api\Director\FileUpload;
+use App\Http\Resources\Api\FileResource;
 use App\Models\Director;
 use App\Http\Requests\Api\Director\DirectorListRequest;
 use App\Http\Resources\Api\DirectorResource;
 use App\Services\Director\CreateDirectorService;
+use App\Services\File\DirectorFileService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
@@ -42,9 +45,23 @@ class DirectorController extends Controller
     public function create(
         DirectorCreateRequest $directorCreate,
         CreateDirectorService $createDirectorService
-    ): DirectorResource {
+    ): DirectorResource
+    {
         $director = $createDirectorService->create($directorCreate->all());
 
         return new DirectorResource($director);
+    }
+
+    /**
+     * @param int $directorId
+     * @param FileUpload $fileUpload
+     * @return FileResource
+     */
+    public function uploadImage(int $directorId, FileUpload $fileUpload): FileResource
+    {
+        $service = new DirectorFileService($directorId);
+        $request = $fileUpload->all();
+        $newDirectorModel = $service->upload($request);
+        return new FileResource($newDirectorModel);
     }
 }

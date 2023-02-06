@@ -9,6 +9,8 @@ use EloquentFilter\Filterable;
 
 /**
  * Class Director
+ * @property string  $firstname
+ * @property string $lastname
  * @method static Builder|self byOrder(string $defaultOrder, string $value, ?string $fieldName)
  */
 class Director extends Model
