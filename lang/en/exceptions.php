@@ -30,6 +30,9 @@ return [
             'directors' => [
                 'create_error' => 'There was a problem creating this director. Please try again.',
             ],
+            'films' => [
+                'create_error' => 'There was a problem creating this film. Please try again.',
+            ],
             'director_images' => [
                 'create_error' => 'There was a problem creating this director\'s image. Please try again.',
             ],

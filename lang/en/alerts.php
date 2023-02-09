@@ -33,6 +33,9 @@ return [
             'updated' => 'The user was successfully updated.',
             'updated_password' => "The user's password was successfully updated.",
         ],
+        'films' => [
+            'created' => 'The film was successfully created.',
+        ],
     ],
 
     'frontend' => [
