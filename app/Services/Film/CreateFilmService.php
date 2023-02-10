@@ -23,7 +23,7 @@ class CreateFilmService
             [
                 'title' => $data['title'],
                 'description' => $data['description'],
-                'published_at' => now(),
+                'released_at' => $data['releasedDate'],
             ]
         );
         if ($film) {

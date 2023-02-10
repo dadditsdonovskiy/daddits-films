@@ -19,7 +19,7 @@ class FilmFactory extends Factory
         return [
             'title' => $this->faker->name,
             'description' => $this->faker->text,
-            'published_at' => $this->faker->date(),
+            'released_at' => $this->faker->date(),
             'created_at' => time(),
             'updated_at' => time()
         ];

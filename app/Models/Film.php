@@ -11,13 +11,15 @@ use EloquentFilter\Filterable;
  * Class Film
  * @property string  $title
  * @property string $description
+ * @property string $released_at
+ * @property int $created_at
  * @method static Builder|self byOrder(string $defaultOrder, string $value, ?string $fieldName)
  */
 class Film extends Model
 {
     use HasFactory, Filterable;
 
-    protected $fillable = ['title', 'description', 'published_at'];
+    protected $fillable = ['title', 'description', 'released_at'];
 
     /**
      * @param Builder $query
