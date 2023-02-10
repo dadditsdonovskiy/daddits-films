@@ -26,9 +26,16 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
         </ul>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+        <form action="{{ route('film.search') }}" method="get">
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="Search..."
+                    value="{{ request('q') }}"
+                />
+            </div>
         </form>
     </div>
 </div>

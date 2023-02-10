@@ -21,7 +21,7 @@ use Carbon\Carbon;
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Description</th>
+                <th scope="col" width="20%">Description</th>
                 <th scope="col">Date of release</th>
                 <th scope="col">Added at</th>
                 <th scope="col">Actions</th>
@@ -32,10 +32,9 @@ use Carbon\Carbon;
                 <tr>
                     <th scope="row">{{$film->id}}</th>
                     <td>{{$film->title}}</td>
-                    <td>{{$film->description}}</td>
+                    <td style="width: 20%">{{$film->description}}</td>
                     <td>{{$film->released_at}}</td>
                     <td>{{ Carbon::parse($film->created_at)->format('Y-m-d') }}</td>
-                    <td>
                     <td>
                         @include('components.actions',['url'=>url("/film/{$film->id}"),'actions'=>['view','edit','delete']])
                     </td>

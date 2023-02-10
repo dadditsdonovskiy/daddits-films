@@ -40,9 +40,11 @@ Route::group(
                 Route::get('/', [FilmController::class, 'index'])->name('films.index');
                 Route::get('/new', [FilmController::class, 'showNewForm'])->name('film.show.new.form');
                 Route::post('save', [FilmController::class, 'saveFilm'])->name('film.save');
+                Route::post('/search', [FilmController::class, 'searchFilm'])->name('film.search');
             }
         );
     }
+
 );
 
 
