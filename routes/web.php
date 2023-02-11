@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\User\DeleteController as UserDeleteController;
 use App\Http\Controllers\Backend\User\ListController as UserListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Film\FilmController;
+use App\Http\Controllers\Backend\Director\DirectorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,12 @@ Route::group(
                 Route::get('/new', [FilmController::class, 'showNewForm'])->name('film.show.new.form');
                 Route::post('save', [FilmController::class, 'saveFilm'])->name('film.save');
                 Route::get('/search', [FilmController::class, 'searchFilm'])->name('film.search');
+            }
+        );
+        Route::group(
+            ['prefix' => 'director'],
+            function () {
+                Route::get('/', [DirectorController::class, 'index'])->name('directors.index');
             }
         );
     }

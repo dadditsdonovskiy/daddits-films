@@ -19,6 +19,10 @@
                     <a href="{{route('films.index')}}"
                                                 class="text-decoration-none text-black">Films</a>
                 </li>
+                <li class="list-group-item {{ (request()->is('director')) ? 'active' : '' }}">
+                    <a href="{{route('directors.index')}}"
+                       class="text-decoration-none text-black">Directors</a>
+                </li>
               </ul>
         </div>
     </div>
