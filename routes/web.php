@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\User\CreateController as UserCreateController;
 use App\Http\Controllers\Backend\User\DeleteController as UserDeleteController;
 use App\Http\Controllers\Backend\User\ListController as UserListController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\Film\FilmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,13 +28,23 @@ Route::group(
         Route::group(
             ['prefix' => 'user'],
             function () {
-                Route::get('/', [UserListController::class, 'index']);
+                Route::get('/', [UserListController::class, 'index'])->name('users.index');
                 Route::get('/create', [UserCreateController::class, 'showForm']);
                 Route::post('/create', [UserCreateController::class, 'store']);
                 Route::delete('/{user}', [UserDeleteController::class, 'delete']);
             }
         );
+        Route::group(
+            ['prefix' => 'film'],
+            function () {
+                Route::get('/', [FilmController::class, 'index'])->name('films.index');
+                Route::get('/new', [FilmController::class, 'showNewForm'])->name('film.show.new.form');
+                Route::post('save', [FilmController::class, 'saveFilm'])->name('film.save');
+                Route::get('/search', [FilmController::class, 'searchFilm'])->name('film.search');
+            }
+        );
     }
+
 );
 
 

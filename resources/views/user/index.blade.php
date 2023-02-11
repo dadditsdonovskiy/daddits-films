@@ -1,31 +1,37 @@
-@extends('layouts.adminlte')
+<?php
+use App\Models\Auth\User;
+
+/**
+ * @var User $user
+ */
+?>
+@extends('layouts.master')
 @section('title', 'Dashboard')
 
 @section('header')
     <h1>Users</h1>
 @stop
 @section('content')
-    <table class="table table-bordered" aria-describedby="Users">
-        <thead>
-        <tr>
-            <th scope="row">Id</th>
-            <th scope="row">Email</th>
-            <th scope="row">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($users as $user)
+    <div class="mt-5">
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{$user->id}}</td>
-                <td>{{$user->email}}</td>
-                <td>
-                    @include('components.actions',['url'=>url("/user/{$user->id}"),'actions'=>['delete']])
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
-    {{ $users->links() }}
+            </thead>
+            <tbody>
+            @foreach($users as $user)
+            <tr>
+                <th scope="row">{{$user->id}}</th>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @stop
 
 

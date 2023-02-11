@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Validators\Validator;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
