@@ -14,7 +14,7 @@ class DirectorController extends Controller
 {
     public function index()
     {
-        $directors = Director::sortable()->paginate(5);
+        $directors = Director::sortable()->paginate(1);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
 
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);

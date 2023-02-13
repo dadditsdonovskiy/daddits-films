@@ -35,7 +35,13 @@ use Carbon\Carbon;
             @endforeach
             </tbody>
         </table>
+        <span class="sss">
+
+    {{ $directors->links() }}
+    </span>
     </div>
+
 @stop
+
 
 
