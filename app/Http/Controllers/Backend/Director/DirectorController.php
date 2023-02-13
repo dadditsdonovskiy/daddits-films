@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Backend\Director;
 
+use App\Helpers\DirectorsIndexView;
+use App\Helpers\ViewDatabaseColumnHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Director;
-use Itstructure\GridView\DataProviders\EloquentDataProvider;
+
 /**
  * Class DirectorController
  */
@@ -12,9 +14,9 @@ class DirectorController extends Controller
 {
     public function index()
     {
-        $dataProvider = new EloquentDataProvider(Director::query());
-        return view('director.index', [
-            'dataProvider' => $dataProvider
-        ]);
+        $directors = Director::sortable()->paginate(5);
+        $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
+
+        return view('director.index', ['directors' => $directors, 'columns' => $columns]);
     }
 }

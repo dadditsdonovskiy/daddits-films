@@ -1,49 +1,41 @@
+<?php
+
+use App\Models\Director;
+use Carbon\Carbon;
+
+/**
+ * @var Director $director
+ * @var array $columns
+ */
+?>
 @extends('layouts.master')
+@section('title', 'Dashboard')
+
+@section('header')
+    <h1>Directors</h1>
+@stop
 @section('content')
     <div class="mt-5">
-        @php
-            $gridData = [
-                'dataProvider' => $dataProvider,
-                'title' => false,
-                'useFilters' => false,
-                'columnFields' => [
-                    'id',
-                            [
-            'attribute' => 'firstname',
-                'filter' => [
-                    'class' => Itstructure\GridView\Filters\DropdownFilter::class,
-                    'data' => ['key' => 'value', 'key' => 'value'] // Array keys are for html <option> tag values, array values are for titles.
-                ]
-        ],
-                    'lastname',
-                    'birthdate',
-                    'created_at',
-                    [
-                    'label' => 'Actions', // Optional
-                    'class' => Itstructure\GridView\Columns\ActionColumn::class, // Required
-                    'actionTypes' => [ // Required
-                        'view',
-                        'edit' => function ($data) {
-                            return '/admin/pages/' . $data->id . '/edit';
-                        },
-                    [
-                    'class' => Itstructure\GridView\Actions\Delete::class, // Required
-                    'url' => function ($data) { // Optional
-                        return '/admin/pages/' . $data->id . '/delete';
-                    },
-                    'htmlAttributes' => [ // Optional
-                        'target' => '_blank',
-                        'style' => 'color: yellow; font-size: 16px;',
-                        'onclick' => 'return window.confirm("Are you sure you want to delete?");'
-                    ]
-                ]
-            ]
-        ],
-
-                ]
-            ];
-        @endphp
-        @gridView($gridData)
+        <a href="{{route('film.show.new.form')}}" class="btn btn-primary">Add new Director</a>
+        <table class="table">
+            @include('components.table-header',['columns'=>$columns])
+            <tbody>
+            @foreach($directors as $director)
+                <tr>
+                    <th scope="row">{{$director->id}}</th>
+                    <td>{{$director->firstname}}</td>
+                    <td>{{$director->lastname}}</td>
+                    <td>{{$director->birthday_date}}</td>
+                    <td>{{ Carbon::parse($director->created_at)->format('Y-m-d') }}</td>
+                    <td>{{ Carbon::parse($director->updated_at)->format('Y-m-d') }}</td>
+                    <td width="30%">
+                        @include('components.actions',['url'=>url("/film/{$director->id}"),'actions'=>['view','edit','delete']])
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 @stop
+
 
