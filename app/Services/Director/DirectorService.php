@@ -9,7 +9,7 @@ use App\Filters\Director\DirectorSearch;
 
 class DirectorService
 {
-    public function geDirectorsListQuery(DirectorFilter $filters, DirectorSearch $search): Builder
+    public function getDirectorsListQuery(DirectorFilter $filters, DirectorSearch $search): Builder
     {
         $query = Director::select(
             'directors.*'

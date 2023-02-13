@@ -18,7 +18,9 @@ use Carbon\Carbon;
     <div class="mt-5">
         <a href="{{route('film.show.new.form')}}" class="btn btn-primary">Add new Director</a>
         <table class="table">
+            {{Form::open(['url' => route('directors.filter'),'id'=>'directors-form','method'=>'get'])}}
             @include('components.table-header',['columns'=>$columns])
+            {{Form::close()}}
             <tbody>
             @foreach($directors as $director)
                 <tr>
@@ -42,6 +44,17 @@ use Carbon\Carbon;
     </div>
 
 @stop
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#firstname, #lastname").keypress(function (e) {
+            if (e.which == 13) {
+                $('form#directors-form').submit();
+                return false;    //<---- Add this line
+            }
+        });
+    });
+</script>
 
 
 

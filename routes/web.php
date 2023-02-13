@@ -48,10 +48,10 @@ Route::group(
             ['prefix' => 'director'],
             function () {
                 Route::get('/', [DirectorController::class, 'index'])->name('directors.index');
+                Route::get('/filter', [DirectorController::class, 'filter'])->name('directors.filter');
             }
         );
     }
-
 );
 
 

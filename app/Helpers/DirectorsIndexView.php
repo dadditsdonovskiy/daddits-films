@@ -16,7 +16,7 @@ class DirectorsIndexView
             'styles' => 'width:3%'
         ],
         'firstname' => [
-            'id' => 'Firstname',
+            'id' => 'firstname',
             'class' => 'director_firstname form-control',
             'placeholder' => 'Firstname',
             'name' => 'firstname',
