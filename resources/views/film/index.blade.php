@@ -6,6 +6,13 @@ use Carbon\Carbon;
 /**
  * @var Film $film
  */
+$searchColumns = [
+    ['width' => '5%', 'name' => 'id', 'placeholder' => 'ID', 'title' => 'Id'],
+    ['width' => '#', 'name' => 'title', 'placeholder' => 'Title', 'title' => 'Title'],
+    ['width' => '20%', 'name' => 'description', 'placeholder' => 'Description', 'title' => 'Description'],
+    ['width' => '10%', 'name' => 'releasedAt', 'placeholder' => 'Released At', 'title' => 'Released At'],
+    ['width' => '10%', 'name' => 'addedAt', 'placeholder' => 'Added At', 'title' => 'Added At'],
+];
 ?>
 @extends('layouts.master')
 @section('title', 'Dashboard')
@@ -17,16 +24,7 @@ use Carbon\Carbon;
     <div class="mt-5">
         <a href="{{route('film.show.new.form')}}" class="btn btn-primary">Add new Film</a>
         <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col" width="20%">Description</th>
-                <th scope="col">Date of release</th>
-                <th scope="col">Added at</th>
-                <th scope="col">Actions</th>
-            </tr>
-            </thead>
+            @include('components.table-header',['columns'=>$searchColumns])
             <tbody>
             @foreach($films as $film)
                 <tr>

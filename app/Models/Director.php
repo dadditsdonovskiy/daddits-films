@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use EloquentFilter\Filterable;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * Class Director
@@ -15,9 +15,17 @@ use EloquentFilter\Filterable;
  */
 class Director extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Sortable;
 
     protected $fillable = ['firstname', 'lastname', 'birthday_date'];
+
+
+    public $sortable = ['id',
+        'firstname',
+        'lastname',
+        'birthday_date',
+        'created_at',
+        'updated_at'];
 
     /**
      * @param Builder $query
@@ -30,5 +38,13 @@ class Director extends Model
     {
         return $fieldName && $value ? $query->orderBy($fieldName, $value) :
             $query->orderBy($defaultOrder, 'DESC');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getTableName(): string
+    {
+        return (new self())->getTable();
     }
 }
