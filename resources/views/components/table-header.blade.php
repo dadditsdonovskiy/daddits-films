@@ -14,3 +14,4 @@
         @enderror
     </th>
 @endforeach
+<th width="10%">Action Columns</th>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend\Director;
+namespace App\Http\Requests\Backend\Country;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,7 +27,7 @@ class DirectorSearchRequest extends FormRequest
             'perPage' => ['integer', 'max:10000'],
             'page' => ['integer'],
             //'id' => ['required'],
-            'firstname' => ['string','nullable']
+            'name' => ['string', 'nullable']
         ];
     }
 }

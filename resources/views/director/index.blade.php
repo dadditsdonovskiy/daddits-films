@@ -12,11 +12,11 @@ use Carbon\Carbon;
 @section('title', 'Dashboard')
 
 @section('header')
-    <h1>Directors</h1>
+    <h1>Directors</h1>create.blade.php
 @stop
 @section('content')
     <div class="mt-5">
-        <a href="{{route('film.show.new.form')}}" class="btn btn-primary">Add new Director</a>
+        <a href="{{route('film.show.new.form')}}" class="btn btn-primary mb-2">Add new Director</a>
         <table class="table">
             {{Form::open(['url' => route('directors.filter'),'id'=>'directors-form','method'=>'get'])}}
             @include('components.table-header',['columns'=>$columns])
@@ -35,7 +35,7 @@ use Carbon\Carbon;
                     <td>{{$director->birthday_date}}</td>
                     <td>{{ Carbon::parse($director->created_at)->format('Y-m-d') }}</td>
                     <td>{{ Carbon::parse($director->updated_at)->format('Y-m-d') }}</td>
-                    <td width="30%">
+                    <td width="10%">
                         @include('components.actions',['url'=>url("/film/{$director->id}"),'actions'=>['view','edit','delete']])
                     </td>
                 </tr>

@@ -23,6 +23,10 @@
                     <a href="{{route('directors.index')}}"
                        class="text-decoration-none text-black">Directors</a>
                 </li>
+                <li class="list-group-item {{ (request()->is('country')) ? 'active' : '' }}">
+                    <a href="{{route('countries.index')}}"
+                       class="text-decoration-none text-black">Countries</a>
+                </li>
               </ul>
         </div>
     </div>
