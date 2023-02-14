@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\User\ListController as UserListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Film\FilmController;
 use App\Http\Controllers\Backend\Director\DirectorController;
+use App\Http\Controllers\Backend\Country\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,12 @@ Route::group(
             function () {
                 Route::get('/', [DirectorController::class, 'index'])->name('directors.index');
                 Route::get('/filter', [DirectorController::class, 'filter'])->name('directors.filter');
+            }
+        );
+        Route::group(
+            ['prefix' => 'country'],
+            function () {
+                Route::get('/', [CountryController::class, 'index'])->name('countries.index');
             }
         );
     }
