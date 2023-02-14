@@ -7,31 +7,42 @@ use App\Helpers\ViewDatabaseColumnHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Director\CountrySearchRequest;
 use App\Models\Director;
-use App\Services\Director\DirectorService;
+use App\Services\Director\SearchDirectorService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 /**
  * Class DirectorController
  */
 class DirectorController extends Controller
 {
-    private $directorService;
+    private $directorSearchService;
 
-    public function __construct(DirectorService $directorService)
+    public function __construct(SearchDirectorService $directorSearchService)
     {
-        $this->directorService = $directorService;
+        $this->directorSearchService = $directorSearchService;
     }
 
-    public function index()
+    /**
+     * @return Application|Factory|View
+     */
+    public function index(): Factory|View|Application
     {
         $directors = Director::sortable()->paginate(5);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
-
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
     }
 
-    public function filter(CountrySearchRequest $request)
+    /**
+     * @param CountrySearchRequest $request
+     * @return Application|Factory|View
+     */
+    public function filter(CountrySearchRequest $request): Factory|View|Application
     {
-        $directors =  Director::where('firstname', 'like', '%' . $request->firstname . '%')->paginate(5);
+        $perPage =  5;
+        $directorsQuery = $this->directorSearchService->getQuery($request->only(['firstname', 'lastname', 'id']));
+        $directors = $directorsQuery->paginate($perPage);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
     }
