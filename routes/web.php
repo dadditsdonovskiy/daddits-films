@@ -56,6 +56,7 @@ Route::group(
             ['prefix' => 'country'],
             function () {
                 Route::get('/', [CountryController::class, 'index'])->name('countries.index');
+                Route::get('/filter', [CountryController::class, 'filter'])->name('countries.filter');
             }
         );
     }

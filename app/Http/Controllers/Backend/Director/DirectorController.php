@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Director;
 use App\Helpers\DirectorsIndexView;
 use App\Helpers\ViewDatabaseColumnHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Director\DirectorSearchRequest;
+use App\Http\Requests\Backend\Director\CountrySearchRequest;
 use App\Models\Director;
 use App\Services\Director\DirectorService;
 
@@ -29,7 +29,7 @@ class DirectorController extends Controller
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
     }
 
-    public function filter(DirectorSearchRequest $request)
+    public function filter(CountrySearchRequest $request)
     {
         $directors =  Director::where('firstname', 'like', '%' . $request->firstname . '%')->paginate(5);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();

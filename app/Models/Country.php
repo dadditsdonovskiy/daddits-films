@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use EloquentFilter\Filterable;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * Class Film
@@ -15,7 +16,7 @@ use EloquentFilter\Filterable;
  */
 class Country extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Filterable, Sortable;
 
     protected $fillable = ['name'];
 
