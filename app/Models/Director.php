@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use EloquentFilter\Filterable;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
@@ -16,7 +15,7 @@ use Kyslik\ColumnSortable\Sortable;
  */
 class Director extends Model
 {
-    use HasFactory, Filterable, Sortable;
+    use HasFactory, Sortable;
 
     protected $fillable = ['firstname', 'lastname', 'birthday_date'];
 

@@ -2,6 +2,7 @@
 
 
 namespace App\Services\Director;
+
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Director;
 use App\Filters\Director\DirectorFilter;
@@ -14,9 +15,8 @@ class DirectorService
         $query = Director::select(
             'directors.*'
         );
-
-
-        return $query->filter($filters)->search($search);
+        $filtered = $query->filter($filters);
+        $co = $filtered->search($search);
+        return $filtered->search($search);
     }
-
 }
