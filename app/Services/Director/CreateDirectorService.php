@@ -22,7 +22,7 @@ class CreateDirectorService
             [
                 'firstname' => $data['firstname'],
                 'lastname' => $data['lastname'],
-                'birthday_date' => $data['birthdayDate'],
+                'birthday_date' => $data['birthday'],
             ]
         );
         if ($director) {
