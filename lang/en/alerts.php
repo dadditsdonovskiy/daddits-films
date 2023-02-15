@@ -36,6 +36,9 @@ return [
         'films' => [
             'created' => 'The film was successfully created.',
         ],
+        'directors' => [
+            'created' => 'The director was successfully added.',
+        ],
     ],
 
     'frontend' => [

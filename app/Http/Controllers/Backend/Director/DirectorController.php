@@ -6,7 +6,9 @@ use App\Helpers\DirectorsIndexView;
 use App\Helpers\ViewDatabaseColumnHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Director\CountrySearchRequest;
+use App\Http\Requests\Backend\Director\StoreDirectorRequest;
 use App\Models\Director;
+use App\Services\Director\CreateDirectorService;
 use App\Services\Director\SearchDirectorService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -29,7 +31,13 @@ class DirectorController extends Controller
      */
     public function index(): Factory|View|Application
     {
-        $directors = Director::sortable()->paginate(5);
+        $directors = Director::all()->toArray();
+        $directors = Director::filter($directors)->byOrder(
+            'created_at',
+            'desc',
+            'id'
+        )
+            ->paginate(5);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
     }
@@ -45,5 +53,20 @@ class DirectorController extends Controller
         $directors = $directorsQuery->paginate($perPage);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
+    }
+
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function showAddForm() {
+        return view('director.create');
+    }
+
+
+    public function saveDirector(StoreDirectorRequest $request, CreateDirectorService $createDirectorService)
+    {
+        $createDirectorService->create($request->all());
+        return redirect()->route('directors.index')->withSuccess(__('alerts.backend.directors.created'));
     }
 }

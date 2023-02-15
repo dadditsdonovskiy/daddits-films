@@ -16,7 +16,7 @@ use Carbon\Carbon;
 @stop
 @section('content')
     <div class="mt-5">
-        <a href="{{route('film.show.new.form')}}" class="btn btn-primary mb-2">Add new Director</a>
+        <a href="{{route('directors.show.new.form')}}" class="btn btn-primary mb-2">Add new Director</a>
         <table class="table">
             {{Form::open(['url' => route('directors.filter'),'id'=>'directors-form','method'=>'get'])}}
             @include('components.table-header',['columns'=>$columns])

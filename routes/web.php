@@ -40,9 +40,9 @@ Route::group(
             ['prefix' => 'film'],
             function () {
                 Route::get('/', [FilmController::class, 'index'])->name('films.index');
-                Route::get('/new', [FilmController::class, 'showNewForm'])->name('film.show.new.form');
-                Route::post('save', [FilmController::class, 'saveFilm'])->name('film.save');
-                Route::get('/search', [FilmController::class, 'searchFilm'])->name('film.search');
+                Route::get('/new', [FilmController::class, 'showNewForm'])->name('films.show.new.form');
+                Route::post('save', [FilmController::class, 'saveFilm'])->name('films.save');
+                Route::get('/search', [FilmController::class, 'searchFilm'])->name('films.search');
             }
         );
         Route::group(
@@ -50,6 +50,8 @@ Route::group(
             function () {
                 Route::get('/', [DirectorController::class, 'index'])->name('directors.index');
                 Route::get('/filter', [DirectorController::class, 'filter'])->name('directors.filter');
+                Route::get('/new', [DirectorController::class, 'showAddForm'])->name('directors.show.new.form');
+                Route::post('save', [DirectorController::class, 'saveDirector'])->name('directors.save');
             }
         );
         Route::group(
@@ -57,6 +59,7 @@ Route::group(
             function () {
                 Route::get('/', [CountryController::class, 'index'])->name('countries.index');
                 Route::get('/filter', [CountryController::class, 'filter'])->name('countries.filter');
+
             }
         );
     }
