@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            @include('partials.scripts')
+
             @include('partials.flash-messages')
             @yield('content')
         </div>
@@ -57,6 +57,6 @@
 </div>
 
 @include('partials.footer')
+@include('partials.scripts')
 </body>
-
 </html>

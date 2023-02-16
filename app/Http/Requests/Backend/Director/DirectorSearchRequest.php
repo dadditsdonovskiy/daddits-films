@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend\Director;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CountrySearchRequest extends FormRequest
+class DirectorSearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

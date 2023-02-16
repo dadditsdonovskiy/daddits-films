@@ -6,6 +6,7 @@ use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Kyslik\ColumnSortable\Sortable;
 
 /**
@@ -20,13 +21,14 @@ class Director extends Model
 
     protected $fillable = ['firstname', 'lastname', 'birthday_date'];
 
-
-    public $sortable = ['id',
+    public $sortable = [
+        'id',
         'firstname',
         'lastname',
         'birthday_date',
         'created_at',
-        'updated_at'];
+        'updated_at'
+    ];
 
     /**
      * @param Builder $query
@@ -47,5 +49,21 @@ class Director extends Model
     public static function getTableName(): string
     {
         return (new self())->getTable();
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function films(): BelongsToMany
+    {
+        return $this->belongsToMany(Film::class,'film_actor')->withTimestamps();
     }
 }

@@ -34,6 +34,7 @@ class StoreFilmRequest extends FormRequest
             'title' => ['required', 'string', 'min:3', 'max:20'],
             'description' => ['required', 'string', 'min:5', 'max:200'],
             'releasedDate' => 'required|date|after:' . $oldest . '|before:' . $newest,
+            'directors' => ['required', 'exists:directors,id']
         ];
     }
 }
