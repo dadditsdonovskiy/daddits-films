@@ -41,7 +41,7 @@ Route::group(
             function () {
                 Route::get('/', [FilmController::class, 'index'])->name('films.index');
                 Route::get('/new', [FilmController::class, 'showNewForm'])->name('films.show.new.form');
-                Route::post('save', [FilmController::class, 'saveFilm'])->name('films.save');
+                Route::get('filter', [FilmController::class, 'filter'])->name('films.filter');
                 Route::get('/search', [FilmController::class, 'searchFilm'])->name('films.search');
             }
         );

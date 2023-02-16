@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Kyslik\ColumnSortable\Sortable;
 
 /**
  * Class Film
@@ -17,9 +19,18 @@ use EloquentFilter\Filterable;
  */
 class Film extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Filterable, Sortable;
 
     protected $fillable = ['title', 'description', 'released_at'];
+
+    public $sortable = [
+        'id',
+        'title',
+        'description',
+        'released_at',
+        'created_at',
+        'updated_at'
+    ];
 
     /**
      * @param Builder $query
@@ -32,5 +43,13 @@ class Film extends Model
     {
         return $fieldName && $value ? $query->orderBy($fieldName, $value) :
             $query->orderBy($defaultOrder, 'DESC');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function directors(): BelongsToMany
+    {
+        return $this->belongsToMany(Director::class,'film_director')->withTimestamps();
     }
 }

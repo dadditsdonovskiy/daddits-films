@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <form action="{{ route('film.save') }}" method="POST">
+    <form action="{{ route('films.save') }}" method="POST">
         <h1>New Film</h1>
         @csrf
         <div class="mb-3">
@@ -10,7 +10,7 @@
                     'class'      => 'form-control',
                     'name'       => 'title',
                     'id'         => 'txt1',
-                    'onkeypress' => "return nameFunction(event);"
+                    //'onkeypress' => "return nameFunction(event);"
             ])}}
             @error('title')
             <div class="invalid-feedback">
@@ -26,7 +26,7 @@
                     'rows'       => 10,
                     'name'       => 'description',
                     'id'         => 'txt',
-                    'onkeypress' => "return nameFunction(event);"
+                    //'onkeypress' => "return nameFunction(event);"
              ]) !!}
             @error('description')
             <div class="invalid-feedback">
@@ -51,8 +51,13 @@
                 </div>
             </div>
         </div>
+        <div class="mb-3">
+            <div class="form-group">
+                <label for="director_id">Directed by</label>
+                {!!Form::select('directors[]',$directors,null,['multiple'=>"multiple", 'class'=>'select2-multiple form-control','placeholder'=>null]) !!}
+            </div>
+        </div>
         <div class="text-center float-left" style="float: left">
-
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>

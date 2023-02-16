@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend\Director;
 use App\Helpers\DirectorsIndexView;
 use App\Helpers\ViewDatabaseColumnHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Director\CountrySearchRequest;
+use App\Http\Requests\Backend\Director\DirectorSearchRequest;
 use App\Http\Requests\Backend\Director\StoreDirectorRequest;
 use App\Models\Director;
 use App\Services\Director\CreateDirectorService;
@@ -32,7 +32,7 @@ class DirectorController extends Controller
     public function index(): Factory|View|Application
     {
         $directors = Director::all()->toArray();
-        $directors = Director::filter($directors)->byOrder(
+        $directors = Director::sortable()->filter($directors)->byOrder(
             'created_at',
             'desc',
             'id'
@@ -43,10 +43,10 @@ class DirectorController extends Controller
     }
 
     /**
-     * @param CountrySearchRequest $request
+     * @param DirectorSearchRequest $request
      * @return Application|Factory|View
      */
-    public function filter(CountrySearchRequest $request): Factory|View|Application
+    public function filter(DirectorSearchRequest $request): Factory|View|Application
     {
         $perPage =  5;
         $directorsQuery = $this->directorSearchService->getQuery($request->only(['firstname', 'lastname', 'id']));

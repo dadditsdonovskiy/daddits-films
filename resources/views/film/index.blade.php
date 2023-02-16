@@ -6,13 +6,6 @@ use Carbon\Carbon;
 /**
  * @var Film $film
  */
-$searchColumns = [
-    ['width' => '5%', 'name' => 'id', 'placeholder' => 'ID', 'title' => 'Id'],
-    ['width' => '#', 'name' => 'title', 'placeholder' => 'Title', 'title' => 'Title'],
-    ['width' => '20%', 'name' => 'description', 'placeholder' => 'Description', 'title' => 'Description'],
-    ['width' => '10%', 'name' => 'releasedAt', 'placeholder' => 'Released At', 'title' => 'Released At'],
-    ['width' => '10%', 'name' => 'addedAt', 'placeholder' => 'Added At', 'title' => 'Added At'],
-];
 ?>
 @extends('layouts.master')
 @section('title', 'Dashboard')
@@ -22,9 +15,11 @@ $searchColumns = [
 @stop
 @section('content')
     <div class="mt-5">
-        <a href="{{route('film.show.new.form')}}" class="btn btn-primary">Add new Film</a>
+        <a href="{{route('films.show.new.form')}}" class="btn btn-primary">Add new Film</a>
         <table class="table">
-            @include('components.table-header',['columns'=>$searchColumns])
+            {{Form::open(['url' => route('films.filter'),'id'=>'films-form','method'=>'get'])}}
+            @include('components.table-header',['columns'=>$columns])
+            {{Form::close()}}
             <tbody>
             @foreach($films as $film)
                 <tr>
@@ -33,7 +28,8 @@ $searchColumns = [
                     <td style="width: 20%">{{$film->description}}</td>
                     <td>{{$film->released_at}}</td>
                     <td>{{ Carbon::parse($film->created_at)->format('Y-m-d') }}</td>
-                    <td>
+                    <td>{{ Carbon::parse($film->updated_at)->format('Y-m-d') }}</td>
+                    <td width="10%">
                         @include('components.actions',['url'=>url("/film/{$film->id}"),'actions'=>['view','edit','delete']])
                     </td>
                 </tr>
@@ -42,5 +38,5 @@ $searchColumns = [
         </table>
     </div>
 @stop
-
+@include('film.script')
 

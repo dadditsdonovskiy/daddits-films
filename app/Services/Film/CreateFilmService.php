@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Film;
 
 use App\Exceptions\GeneralException;
@@ -26,6 +27,7 @@ class CreateFilmService
                 'released_at' => $data['releasedDate'],
             ]
         );
+        $film->directors()->sync($data['directors']);
         if ($film) {
             DB::commit();
             return $film;
