@@ -14,6 +14,7 @@ use App\Services\Film\SearchFilmService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Backend\Film\FilmSearchRequest;
 
@@ -32,6 +33,7 @@ class FilmController extends Controller
     {
         $this->filmSearchService = $filmSearchService;
     }
+
     public function index()
     {
         $films = Film::all()->toArray();
@@ -52,7 +54,7 @@ class FilmController extends Controller
      */
     public function filter(FilmSearchRequest $request): Factory|View|Application
     {
-        $perPage =  5;
+        $perPage = 5;
         $filmsQuery = $this->filmSearchService->getQuery($request->only(['title', 'description', 'id']));
         $films = $filmsQuery->paginate($perPage);
         $columns = (new ViewDatabaseColumnHelper(FilmsIndexView::$columns))->getColumns();
@@ -80,5 +82,16 @@ class FilmController extends Controller
     {
         $createFilmService->create($request->all());
         return redirect()->route('films.index')->withSuccess('Film was successfully added');
+    }
+
+    /**
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id)
+    {
+        $film = Film::find($id);
+        $film->delete();
+        return redirect()->route('films.index')->withWarning('Film was successfully removed');
     }
 }

@@ -30,7 +30,7 @@ use Carbon\Carbon;
                     <td>{{ Carbon::parse($film->created_at)->format('Y-m-d') }}</td>
                     <td>{{ Carbon::parse($film->updated_at)->format('Y-m-d') }}</td>
                     <td width="10%">
-                        @include('components.actions',['url'=>url("/film/{$film->id}"),'actions'=>['view','edit','delete']])
+                        @include('components.actions',['url'=>route('films.destroy', $film->id),'actions'=>['view','edit','delete']])
                     </td>
                 </tr>
             @endforeach
