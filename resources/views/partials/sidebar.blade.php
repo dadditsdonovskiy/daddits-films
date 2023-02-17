@@ -27,6 +27,10 @@
                     <a href="{{route('countries.index')}}"
                        class="text-decoration-none text-black">Countries</a>
                 </li>
+                <li class="list-group-item {{ (request()->is('imdb')) ? 'active' : '' }}">
+                    <a href="{{route('imdb.search.form')}}"
+                       class="text-decoration-none text-black">Imdb search</a>
+                </li>
               </ul>
         </div>
     </div>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Film\FilmController;
 use App\Http\Controllers\Backend\Director\DirectorController;
 use App\Http\Controllers\Backend\Country\CountryController;
+use App\Http\Controllers\Backend\Imdb\ImdbController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,15 @@ Route::group(
             function () {
                 Route::get('/', [CountryController::class, 'index'])->name('countries.index');
                 Route::get('/filter', [CountryController::class, 'filter'])->name('countries.filter');
+
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'imdb'],
+            function () {
+                Route::get('/', [ImdbController::class, 'showSearchForm'])->name('imdb.search.form');
+                Route::get('/search', [ImdbController::class, 'search'])->name('imdb.getResult');
 
             }
         );
