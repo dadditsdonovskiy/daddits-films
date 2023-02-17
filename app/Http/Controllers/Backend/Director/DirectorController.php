@@ -50,6 +50,7 @@ class DirectorController extends Controller
     {
         $perPage =  5;
         $directorsQuery = $this->directorSearchService->getQuery($request->only(['firstname', 'lastname', 'id']));
+        $directorsQuery = $directorsQuery->having('films_count', '=', $request->filmsCount);
         $directors = $directorsQuery->paginate($perPage);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);

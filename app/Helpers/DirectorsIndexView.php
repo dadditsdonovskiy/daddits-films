@@ -36,6 +36,13 @@ class DirectorsIndexView
             'name' => 'birthday_date',
             'styles' => 'width:10%'
         ],
+        'filmsCount' => [
+            'id' => 'filmsCount',
+            'class' => 'filmsCount_date form-control',
+            'placeholder' => 'Films ount',
+            'name' => 'filmsCount',
+            'styles' => 'width:10%'
+        ],
         'created_at' => [
             'id' => 'created_at',
             'class' => 'director_created_at form-control',

@@ -15,7 +15,7 @@ class SearchDirectorService implements SearchInterface
      */
     public function __construct()
     {
-        $this->model = Director::sortable();
+        $this->model = Director::withCount('films')->sortable();
     }
 
     /**
