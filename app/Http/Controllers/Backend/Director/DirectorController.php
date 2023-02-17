@@ -48,9 +48,8 @@ class DirectorController extends Controller
      */
     public function filter(DirectorSearchRequest $request): Factory|View|Application
     {
-        $perPage =  5;
-        $directorsQuery = $this->directorSearchService->getQuery($request->only(['firstname', 'lastname', 'id']));
-        $directorsQuery = $directorsQuery->having('films_count', '=', $request->filmsCount);
+        $perPage = 5;
+        $directorsQuery = $this->directorSearchService->getQuery($request->only(['firstname', 'lastname', 'id', 'filmsCount']));
         $directors = $directorsQuery->paginate($perPage);
         $columns = (new ViewDatabaseColumnHelper(DirectorsIndexView::$columns))->getColumns();
         return view('director.index', ['directors' => $directors, 'columns' => $columns]);
@@ -60,7 +59,8 @@ class DirectorController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function showAddForm() {
+    public function showAddForm()
+    {
         return view('director.create');
     }
 

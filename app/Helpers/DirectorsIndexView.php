@@ -38,8 +38,8 @@ class DirectorsIndexView
         ],
         'filmsCount' => [
             'id' => 'filmsCount',
-            'class' => 'filmsCount_date form-control',
-            'placeholder' => 'Films ount',
+            'class' => 'filmsCount form-control',
+            'placeholder' => 'Films count',
             'name' => 'filmsCount',
             'styles' => 'width:10%'
         ],

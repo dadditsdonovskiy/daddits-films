@@ -15,7 +15,7 @@ class SearchDirectorService implements SearchInterface
      */
     public function __construct()
     {
-        $this->model = Director::withCount('films')->sortable();
+        $this->model = Director::sortable();
     }
 
     /**
@@ -25,13 +25,23 @@ class SearchDirectorService implements SearchInterface
     public function getQuery(array $params): Builder
     {
         $wherePart = [];
-        foreach ($params as $key => $param) {
+        $searchParams = [];
+        $searchParams['firstname'] = $params['firstname'];
+        $searchParams['lastname'] = $params['lastname'];
+        $searchParams['id'] = $params['id'];
+        foreach ($searchParams as $key => $param) {
             //if param not passed, then don't use in the query
             if ($param) {
                 $wherePart[] = [$key, 'LIKE', '%' . $param . '%'];
             }
         }
-
-        return $this->model->where($wherePart);
+        if ($wherePart) {
+            $this->model->where($wherePart);
+        }
+        //for searching my film count
+        if ($params['filmsCount']) {
+            $this->model->withCount('films')->having('films_count', '=', $params['filmsCount']);
+        }
+        return $this->model;
     }
 }
