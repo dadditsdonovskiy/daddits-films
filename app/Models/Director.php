@@ -64,6 +64,6 @@ class Director extends Model
      */
     public function films(): BelongsToMany
     {
-        return $this->belongsToMany(Film::class,'film_actor')->withTimestamps();
+        return $this->belongsToMany(Film::class,'film_director')->withTimestamps();
     }
 }

@@ -33,10 +33,11 @@ use Carbon\Carbon;
                     <td>{{$director->firstname}}</td>
                     <td>{{$director->lastname}}</td>
                     <td>{{$director->birthday_date}}</td>
+                    <td>{{$director->films()->count()}}</td>
                     <td>{{ Carbon::parse($director->created_at)->format('Y-m-d') }}</td>
                     <td>{{ Carbon::parse($director->updated_at)->format('Y-m-d') }}</td>
                     <td width="10%">
-                        @include('components.actions',['url'=>url("/film/{$director->id}"),'actions'=>['view','edit','delete']])
+                        @include('components.actions',['url'=>url("/director/{$director->id}"),'actions'=>['view','edit','delete'],'nameToDelete'=>$director->fullName])
                     </td>
                 </tr>
             @endforeach
@@ -48,17 +49,7 @@ use Carbon\Carbon;
     </span>
     </div>
 @stop
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#firstname, #lastname").keypress(function (e) {
-            if (e.which == 13) {
-                $('form#directors-form').submit();
-                return false;    //<---- Add this line
-            }
-        });
-    });
-</script>
+@include('director.script')
 
 
 

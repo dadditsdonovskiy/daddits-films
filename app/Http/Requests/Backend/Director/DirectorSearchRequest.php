@@ -27,7 +27,15 @@ class DirectorSearchRequest extends FormRequest
             'perPage' => ['integer', 'max:10000'],
             'page' => ['integer'],
             //'id' => ['required'],
-            'firstname' => ['string','nullable']
+            'firstname' => ['string', 'nullable'],
+            'filmsCount' => ['integer', 'nullable']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'filmsCount.integer' => 'Count should be an integer',
         ];
     }
 }

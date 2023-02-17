@@ -10,7 +10,9 @@
             'class'=>$column['class'],
         ])}}
         @error($column['name'])
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="invalid-feedback" style="display: inline">
+            {{$message}}
+        </div>
         @enderror
     </th>
 @endforeach
