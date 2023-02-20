@@ -70,6 +70,7 @@ Route::group(
             function () {
                 Route::get('/', [ImdbController::class, 'showSearchForm'])->name('imdb.search.form');
                 Route::get('/search', [ImdbController::class, 'search'])->name('imdb.getResult');
+                Route::get('/details/{id}', [ImdbController::class, 'filmDetails'])->name('imdb.view.film.details');
 
             }
         );

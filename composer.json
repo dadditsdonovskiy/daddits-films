@@ -14,6 +14,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "genealabs/laravel-sign-in-with-apple": "^0.6",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hmerritt/imdb-api": "^1.2",
+        "imdbphp/imdbphp": "^8.0",
         "intervention/image": "^2.7",
         "jeroennoten/laravel-adminlte": "^3.5",
         "kyslik/column-sortable": "^6.4",

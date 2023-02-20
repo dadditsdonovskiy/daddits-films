@@ -14,10 +14,8 @@ use Carbon\Carbon;
     <div class="mt-5">
         {{Form::open(['url' => route('imdb.getResult'),'id'=>'imdb-search-form','method'=>'get'])}}
         <div class="col-md-3">
-            {{ Form::text('name', null, ['class' => 'form-control'.($errors->has('name') ? 'border-danger':'')]) }}
+            {{ Form::text('title', null, ['class' => 'form-control'.($errors->has('name') ? 'border-danger':'')]) }}
         </div>
-
-
         {{Form::submit('Search!',['class'=>'btn btn-success'])}}
         {{Form::close()}}
     </div>
